@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zenoir — Fragrance Beyond Expectations</title>
+<meta name="description" content="Zenoir. A house of luxury eau de parfum. Discover Yaqeen, Asmari and Violet Zamani — fragrance beyond expectations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12060f;
+    --ink-2:#1d0b18;
+    --cream:#f4ece0;
+    --gold:#c9a24b;
+    --gold-soft:#e0c987;
+    --amber:#c77e29;
+    --ruby:#b5405a;
+    --violet:#7b3f98;
+    --line:rgba(201,162,75,.28);
+    --display:"Cormorant Garamond",Georgia,serif;
+    --sans:"Jost",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+
+  /* ---------- Shared type ---------- */
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:.72rem;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:400;
+    display:inline-block;
+  }
+  h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.05}
+  .ring-mark{
+    width:46px;height:46px;border:1.5px solid var(--gold);border-radius:50%;
+    display:grid;place-items:center;flex:none;
+  }
+  .ring-mark span{font-family:var(--display);font-size:1.35rem;color:var(--gold-soft);font-style:italic}
+
+  /* ---------- Nav ---------- */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 28px;
+    transition:background .5s ease,padding .5s ease,border-color .5s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.nav.solid{
+    background:rgba(18,6,15,.82);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+    padding:14px 28px;
+  }
+  .brand{
+    font-family:var(--display);
+    font-size:1.55rem;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--cream);
+    display:inline-flex;align-items:center;
+  }
+  /* Logo image: drop images/logo.png into the images folder and it replaces the wordmark automatically */
+  .brand-logo{height:42px;width:auto}
+  .brand-logo-foot{height:52px}
+  .brand-text{display:none;padding-left:.34em} /* shown by onerror fallback if logo.png is missing */
+  .nav.solid .brand-logo{height:36px}
+  .nav-links{display:flex;gap:38px;align-items:center}
+  .nav-links a{
+    font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;
+    color:rgba(244,236,224,.72);transition:color .3s;
+  }
+  .nav-links a:hover{color:var(--gold-soft)}
+  .nav-toggle{
+    display:none;cursor:pointer;padding:0;
+    width:46px;height:46px;border-radius:50%;
+    background:rgba(18,6,15,.55);border:1px solid var(--line);
+    backdrop-filter:blur(8px);
+    align-items:center;justify-content:center;flex-direction:column;
+    transition:background .3s,border-color .3s;
+  }
+  .nav-toggle span{display:block;width:22px;height:1.5px;background:var(--cream);margin:3px 0;transition:.3s}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;min-height:100vh;display:flex;align-items:center;
+    overflow:hidden;
+  }
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:72% center}
+  .hero-bg::after{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(90deg,var(--ink) 8%,rgba(18,6,15,.55) 40%,rgba(18,6,15,.05) 70%),
+      linear-gradient(0deg,var(--ink) 2%,transparent 30%);
+  }
+  .hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 28px;width:100%}
+  .hero-copy{max-width:560px}
+  .hero .eyebrow{margin-bottom:26px;opacity:0;animation:rise 1s .2s forwards}
+  .hero h1{
+    font-size:clamp(3.2rem,8vw,6.2rem);
+    letter-spacing:-.01em;
+    margin-bottom:26px;
+  }
+  .hero h1 em{font-style:italic;color:var(--gold-soft)}
+  .hero h1 .l1{display:block;opacity:0;animation:rise 1s .35s forwards}
+  .hero h1 .l2{display:block;opacity:0;animation:rise 1s .5s forwards}
+  .hero h1 .l3{display:block;opacity:0;animation:rise 1s .65s forwards}
+  .hero p.lede{
+    font-size:1.05rem;color:rgba(244,236,224,.8);max-width:420px;margin-bottom:38px;
+    opacity:0;animation:rise 1s .85s forwards;
+  }
+  .hero .cta-row{display:flex;gap:18px;flex-wrap:wrap;opacity:0;animation:rise 1s 1s forwards}
+
+  .btn{
+    font-family:var(--sans);font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;
+    padding:16px 34px;border:1px solid var(--gold);color:var(--cream);
+    background:transparent;cursor:pointer;transition:.4s;display:inline-block;
+  }
+  .btn:hover{background:var(--gold);color:var(--ink);letter-spacing:.26em}
+  .btn.solid{background:var(--gold);color:var(--ink)}
+  .btn.solid:hover{background:var(--gold-soft);border-color:var(--gold-soft)}
+
+  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ---------- Marquee ---------- */
+  .marquee{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:20px 0;overflow:hidden;white-space:nowrap;background:var(--ink-2);
+  }
+  .marquee-track{display:inline-flex;gap:56px;animation:slide 28s linear infinite}
+  .marquee-track span{
+    font-family:var(--display);font-style:italic;font-size:1.35rem;color:var(--gold-soft);
+    display:inline-flex;align-items:center;gap:56px;
+  }
+  .marquee-track span::after{content:"◦";color:var(--gold);font-style:normal}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- Section frame ---------- */
+  section{position:relative}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 64px}
+  .sec-head .eyebrow{margin-bottom:20px}
+  .sec-head h2{font-size:clamp(2.4rem,5vw,3.6rem)}
+  .sec-head p{color:rgba(244,236,224,.6);margin-top:18px;font-size:1rem}
+
+  /* ---------- Ethos ---------- */
+  .ethos{padding:120px 0}
+  .ethos-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .ethos-copy h2{font-size:clamp(2.2rem,4.5vw,3.4rem);margin-bottom:26px}
+  .ethos-copy p{color:rgba(244,236,224,.72);margin-bottom:20px;max-width:460px}
+  .ethos-marks{display:flex;gap:40px;margin-top:44px;flex-wrap:wrap}
+  .ethos-mark{max-width:150px}
+  .ethos-mark .n{font-family:var(--display);font-size:2.6rem;color:var(--gold-soft);line-height:1}
+  .ethos-mark .t{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,236,224,.55);margin-top:8px}
+  .ethos-art{
+    position:relative;aspect-ratio:4/5;border:1px solid var(--line);
+    display:grid;place-items:center;overflow:hidden;
+    background:radial-gradient(circle at 50% 40%,rgba(123,63,152,.22),transparent 70%),var(--ink-2);
+  }
+  .ethos-art img{width:78%;filter:drop-shadow(0 30px 60px rgba(0,0,0,.6))}
+  .ethos-art .halo{
+    position:absolute;width:60%;aspect-ratio:1;border:1px solid var(--gold);border-radius:50%;
+    top:14%;opacity:.5;
+  }
+
+  /* ---------- Collection ---------- */
+  .collection{padding:120px 0;background:var(--ink-2)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .card{
+    position:relative;border:1px solid var(--line);overflow:hidden;
+    background:var(--ink);transition:transform .5s ease,box-shadow .5s ease;
+    display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-8px)}
+  .card-img{position:relative;aspect-ratio:3/4;overflow:hidden}
+  .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease,filter .6s}
+  .card:hover .card-img img{transform:scale(1.05)}
+  .card-img::after{
+    content:"";position:absolute;inset:0;opacity:0;transition:opacity .6s;
+    background:linear-gradient(0deg,var(--tint) 0%,transparent 55%);mix-blend-mode:soft-light;
+  }
+  .card:hover .card-img::after{opacity:.9}
+  .card-body{padding:30px 28px 34px;text-align:center;border-top:1px solid var(--line)}
+  .card-body .kind{font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  .card-body h3{font-size:2rem;margin-bottom:12px}
+  .card-body .notes{font-size:.82rem;color:rgba(244,236,224,.6);letter-spacing:.04em;min-height:2.6em}
+  .card-body .price{font-family:var(--display);font-size:1.5rem;color:var(--gold-soft);margin:18px 0 22px}
+  .card .btn{width:100%;text-align:center}
+  .card[data-scent="amber"]{--tint:var(--amber)}
+  .card[data-scent="ruby"]{--tint:var(--ruby)}
+  .card[data-scent="violet"]{--tint:var(--violet)}
+
+  /* ---------- Notes / craft strip ---------- */
+  .craft{padding:120px 0}
+  .craft-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border:1px solid var(--line)}
+  .craft-cell{padding:52px 38px;background:var(--ink-2);border:1px solid transparent;transition:background .5s}
+  .craft-cell:hover{background:var(--ink)}
+  .craft-cell .ring-mark{margin-bottom:26px}
+  .craft-cell h3{font-size:1.7rem;margin-bottom:14px}
+  .craft-cell p{color:rgba(244,236,224,.6);font-size:.94rem}
+
+  /* ---------- Quote ---------- */
+  .quote{padding:130px 0;text-align:center;background:
+     radial-gradient(circle at 50% 0%,rgba(201,162,75,.12),transparent 60%),var(--ink)}
+  .quote blockquote{
+    font-family:var(--display);font-style:italic;font-weight:300;
+    font-size:clamp(1.8rem,4vw,3rem);line-height:1.3;max-width:820px;margin:0 auto 28px;color:var(--cream);
+  }
+  .quote blockquote em{color:var(--gold-soft)}
+  .quote cite{font-style:normal;font-size:.74rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+
+  /* ---------- CTA ---------- */
+  .final{padding:120px 0;text-align:center;background:var(--ink-2);border-top:1px solid var(--line)}
+  .final h2{font-size:clamp(2.4rem,5.5vw,4rem);margin-bottom:22px}
+  .final p{color:rgba(244,236,224,.65);max-width:460px;margin:0 auto 40px}
+  .signup{display:flex;gap:0;max-width:440px;margin:0 auto;border:1px solid var(--gold)}
+  .signup input{
+    flex:1;background:transparent;border:0;padding:16px 20px;color:var(--cream);
+    font-family:var(--sans);font-size:.9rem;outline:none;letter-spacing:.04em;
+  }
+  .signup input::placeholder{color:rgba(244,236,224,.4)}
+  .signup button{
+    background:var(--gold);color:var(--ink);border:0;padding:0 26px;cursor:pointer;
+    font-family:var(--sans);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;transition:background .3s;
+  }
+  .signup button:hover{background:var(--gold-soft)}
+
+  /* ---------- Footer ---------- */
+  footer{padding:70px 0 40px;border-top:1px solid var(--line)}
+  .foot-grid{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px}
+  .foot-brand .brand{font-size:1.9rem;display:block;margin-bottom:14px}
+  .foot-brand p{color:rgba(244,236,224,.5);font-size:.86rem;max-width:280px}
+  .foot-col h4{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;font-family:var(--sans);font-weight:400}
+  .foot-col a{display:block;font-size:.9rem;color:rgba(244,236,224,.6);margin-bottom:12px;transition:color .3s}
+  .foot-col a:hover{color:var(--gold-soft)}
+  .foot-bottom{margin-top:56px;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:.76rem;color:rgba(244,236,224,.4);letter-spacing:.08em}
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s ease,transform .9s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:900px){
+    .ethos-grid{grid-template-columns:1fr;gap:50px}
+    .cards{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+    .craft-grid{grid-template-columns:1fr}
+    .hero-bg img{object-position:68% center}
+  }
+  @media (max-width:680px){
+    .nav-links{
+      position:fixed;inset:0 0 0 auto;width:78%;max-width:320px;
+      background:rgba(18,6,15,.97);backdrop-filter:blur(16px);
+      flex-direction:column;justify-content:center;gap:34px;
+      transform:translateX(100%);transition:transform .5s ease;
+      border-left:1px solid var(--line);
+    }
+    .nav-links.open{transform:translateX(0)}
+    .nav-links a{font-size:1rem}
+    .nav-toggle{display:flex;z-index:60}
+    .nav-toggle.open{background:rgba(18,6,15,.9)}
+    .nav-toggle.open span:nth-child(1){transform:translateY(4.5px) rotate(45deg)}
+    .nav-toggle.open span:nth-child(2){opacity:0}
+    .nav-toggle.open span:nth-child(3){transform:translateY(-4.5px) rotate(-45deg)}
+    .hero-bg::after{background:linear-gradient(0deg,var(--ink) 12%,rgba(18,6,15,.45) 55%,rgba(18,6,15,.7))}
+    .hero-copy{max-width:100%}
+    .hero .cta-row .btn{flex:1;text-align:center;padding:15px 18px}
+    .wrap,.hero-inner{padding:0 22px}
+    .ethos,.collection,.craft,.quote,.final{padding:84px 0}
+    .signup{flex-direction:column;border:0;gap:12px}
+    .signup input{border:1px solid var(--gold)}
+    .signup button{padding:15px;border:1px solid var(--gold)}
+    .foot-grid{flex-direction:column}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto}
+    .reveal{opacity:1;transform:none}
+  }
+  :focus-visible{outline:2px solid var(--gold-soft);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a href="#top" class="brand" id="brandNav">
+    <img src="images/logo.png" alt="Zenoir" class="brand-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
+    <span class="brand-text">Zenoir</span>
+  </a>
+  <nav class="nav-links" id="navLinks">
+    <a href="#collection">Collection</a>
+    <a href="#craft">The House</a>
+    <a href="#story">Philosophy</a>
+    <a href="#discover" class="btn" style="padding:11px 24px">Shop</a>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="images/Zenoir_web.jpg" alt="Zenoir fragrance collection">
+  </div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <span class="eyebrow">Maison de Parfum</span>
+      <h1>
+        <span class="l1">Fragrance</span>
+        <span class="l2">Beyond</span>
+        <span class="l3"><em>Expectations.</em></span>
+      </h1>
+      <p class="lede">Three signatures composed from the rarest naturals — an olfactory portrait of desire, memory and light.</p>
+      <div class="cta-row">
+        <a href="#collection" class="btn solid">Discover the Collection</a>
+        <a href="#story" class="btn">Our Philosophy</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Eau de Parfum</span><span>Rare Naturals</span><span>Crafted in Small Batches</span><span>Yaqeen</span><span>Asmari</span><span>Violet Zamani</span>
+    <span>Eau de Parfum</span><span>Rare Naturals</span><span>Crafted in Small Batches</span><span>Yaqeen</span><span>Asmari</span><span>Violet Zamani</span>
+  </div>
+</div>
+
+<!-- ETHOS -->
+<section class="ethos" id="story">
+  <div class="wrap">
+    <div class="ethos-grid">
+      <div class="ethos-copy reveal">
+        <span class="eyebrow">The Philosophy</span>
+        <h2 style="margin-top:20px">A scent is a memory<br>you can wear.</h2>
+        <p>Zenoir was founded on a single belief — that fragrance should move you before you can name why. Every composition begins with rare naturals sourced at their peak and matured slowly, the way something precious should be.</p>
+        <p>We compose in small batches, refusing the shortcuts of mass perfumery. What reaches you is uncompromised: rich, layered, and unmistakably yours.</p>
+        <div class="ethos-marks">
+          <div class="ethos-mark"><div class="n">100%</div><div class="t">Natural Essences</div></div>
+          <div class="ethos-mark"><div class="n">24h</div><div class="t">Lasting Sillage</div></div>
+          <div class="ethos-mark"><div class="n">03</div><div class="t">Signature Scents</div></div>
+        </div>
+      </div>
+      <div class="ethos-art reveal">
+        <div class="halo"></div>
+        <img src="images/Asmari_new.png" alt="Asmari by Zenoir">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section class="collection" id="collection">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">The Collection</span>
+      <h2>Three Signatures</h2>
+      <p>Each fragrance is a world of its own — chosen to reveal a different facet of the one who wears it.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal" data-scent="ruby">
+        <div class="card-img"><img src="images/Yaqeen_new.png" alt="Yaqeen by Zenoir"></div>
+        <div class="card-body">
+          <div class="kind">Amber · Spice · Oud</div>
+          <h3>Yaqeen</h3>
+          <p class="notes">Saffron and rose over smoked oud and tonka — conviction made scent.</p>
+          <div class="price">380 AED</div>
+          <a href="https://alhajisperfumes.com/en-ae/products/zenoir-yaqeen-extrait-de-parfum-100ml" class="btn" target="_blank" rel="noopener">Buy Now</a>
+        </div>
+      </article>
+      <article class="card reveal" data-scent="amber">
+        <div class="card-img"><img src="images/Asmari_new.png" alt="Asmari by Zenoir"></div>
+        <div class="card-body">
+          <div class="kind">Fruity · Woody · Amber</div>
+          <h3>Asmari</h3>
+          <p class="notes">Pineapple and bergamot melting into amber, moss and warm woods.</p>
+          <div class="price">380 AED</div>
+          <a href="https://alhajisperfumes.com/en-ae/products/zenoir-asmari-extrait-de-parfum-100ml" class="btn" target="_blank" rel="noopener">Buy Now</a>
+        </div>
+      </article>
+      <article class="card reveal" data-scent="violet">
+        <div class="card-img"><img src="images/Zamani_New.png" alt="Violet Zamani by Zenoir"></div>
+        <div class="card-body">
+          <div class="kind">Floral · Violet · Vanilla</div>
+          <h3>Violet Zamani</h3>
+          <p class="notes">Pear and tuberose laced with violet, sandalwood and soft vanilla.</p>
+          <div class="price">380 AED</div>
+          <a href="https://alhajisperfumes.com/en-ae/products/zenoir-violet-zamani-extrait-de-parfum-100ml" class="btn" target="_blank" rel="noopener">Buy Now</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CRAFT -->
+<section class="craft" id="craft">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">The House of Zenoir</span>
+      <h2>Made the slow way</h2>
+    </div>
+    <div class="craft-grid">
+      <div class="craft-cell reveal">
+        <div class="ring-mark"><span>I</span></div>
+        <h3>Sourced at the peak</h3>
+        <p>Bergamot from Calabria, oud from aged heartwood, roses picked at dawn — naturals gathered only when they are at their most expressive.</p>
+      </div>
+      <div class="craft-cell reveal">
+        <div class="ring-mark"><span>II</span></div>
+        <h3>Composed by hand</h3>
+        <p>Our perfumers build each accord in small batches, adjusting drop by drop until the balance is exact and the story is whole.</p>
+      </div>
+      <div class="craft-cell reveal">
+        <div class="ring-mark"><span>III</span></div>
+        <h3>Matured, then bottled</h3>
+        <p>Every composition rests to let its notes marry, sealed under the signature gold ring that crowns the Zenoir flacon.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote">
+  <div class="wrap reveal">
+    <blockquote>"To wear Zenoir is to arrive before you speak — and to be <em>remembered</em> long after you leave."</blockquote>
+    <cite>— The House of Zenoir</cite>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="discover">
+  <div class="wrap reveal">
+    <span class="eyebrow">Join the Maison</span>
+    <h2 style="margin-top:20px">Be first to know.</h2>
+    <p>Private launches, early access to new signatures, and an invitation to the world of Zenoir.</p>
+    <form class="signup" id="signupForm">
+      <input type="email" placeholder="Your email address" required aria-label="Email address">
+      <button type="submit">Subscribe</button>
+    </form>
+    <p id="signupMsg" style="margin-top:18px;color:var(--gold-soft);font-size:.86rem;min-height:1.2em"></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="brand">
+          <img src="images/logo.png" alt="Zenoir" class="brand-logo brand-logo-foot" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
+          <span class="brand-text">Zenoir</span>
+        </span>
+        <p>A maison of luxury eau de parfum. Fragrance beyond expectations, composed from rare naturals.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Collection</h4>
+        <a href="#collection">Yaqeen</a>
+        <a href="#collection">Asmari</a>
+        <a href="#collection">Violet Zamani</a>
+      </div>
+      <div class="foot-col">
+        <h4>The House</h4>
+        <a href="#story">Philosophy</a>
+        <a href="#craft">Craftsmanship</a>
+        <a href="mailto:orientaloudonline@gmail.com">Contact</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href="mailto:orientaloudonline@gmail.com">orientaloudonline@gmail.com</a>
+        <a href="#">Instagram</a>
+        <a href="#">Pinterest</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Zenoir. All rights reserved.</span>
+      <span>Privacy · Terms · Shipping</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav background on scroll
+  const nav=document.getElementById('nav');
+  const onScroll=()=>nav.classList.toggle('solid',window.scrollY>60);
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // Mobile menu
+  const toggle=document.getElementById('navToggle');
+  const links=document.getElementById('navLinks');
+  toggle.addEventListener('click',()=>{
+    links.classList.toggle('open');toggle.classList.toggle('open');
+  });
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    links.classList.remove('open');toggle.classList.remove('open');
+  }));
+
+  // Scroll reveal
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+  },{threshold:.16});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Signup
+  document.getElementById('signupForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    document.getElementById('signupMsg').textContent='Thank you — welcome to the Maison.';
+    this.reset();
+  });
+</script>
+</body>
+</html>
